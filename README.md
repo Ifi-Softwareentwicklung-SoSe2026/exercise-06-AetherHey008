@@ -186,6 +186,7 @@ Ihre Aufgabe ist dann:
 
 Falls im Verlauf der Jürgen-Issues ein UML-Klassendiagramm gefordert wird, ergänzen Sie es in diesem Abschnitt.
 
+<!-- kevin-uml:start -->
 ```text @plantUML
 @startuml
 skinparam classAttributeIconSize 0
@@ -242,12 +243,10 @@ Grundstueck "1" *-- "*" Bauflaeche : enthält
 Bauvorhaben "*" o-- "1..*" Bauflaeche : belegt
 Bauvorhaben "*" --> "1" Antragsteller : gestellt von
 
-note right of Bauflaeche : Validierung: Prüfen ob
-Status == Frei vor Reservierung
-
 @enduml
 ```
-@plantUML.eval(png)ertigstellung
+@plantUML.eval(png)
+<!-- kevin-uml:end -->ertigstellung
     + BauvorhabenStatus Status
     + BauvorhabenAnlegen()
     + StatusAktualisieren()
