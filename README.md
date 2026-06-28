@@ -205,7 +205,7 @@ class Bauflaeche {
     + string Id
     + double Groesse
     + FlaechenStatus Status
-    + FlaecheReservieren()
+    + void FlaecheReservieren()
 }
 
 enum FlaechenStatus {
@@ -219,6 +219,35 @@ class Bauvorhaben {
     + string GeplanteNutzung
     + DateTime Beginn
     + DateTime Fertigstellung
+    + BauvorhabenStatus Status
+    + void BauvorhabenAnlegen()
+    + void StatusAktualisieren()
+}
+
+enum BauvorhabenStatus {
+    AntragEingereicht
+    Genehmigt
+    Abgelehnt
+    InBearbeitung
+    Abgeschlossen
+}
+
+class Antragsteller {
+    + string Name
+    + string Kontaktdaten
+    + string Firma
+}
+
+Grundstueck "1" *-- "*" Bauflaeche : enthält
+Bauvorhaben "*" o-- "1..*" Bauflaeche : belegt
+Bauvorhaben "*" --> "1" Antragsteller : gestellt von
+
+note right of Bauflaeche : Validierung: Prüfen ob
+Status == Frei vor Reservierung
+
+@enduml
+```
+@plantUML.eval(png)ertigstellung
     + BauvorhabenStatus Status
     + BauvorhabenAnlegen()
     + StatusAktualisieren()
