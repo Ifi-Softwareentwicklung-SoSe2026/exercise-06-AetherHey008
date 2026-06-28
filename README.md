@@ -19,7 +19,7 @@ tags: [Sommersemester2026, Softwareentwicklung, Übung06]
 
 -->
 
-[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise-06-AetherHey008/refs/heads/MatteoPomaTask6/README.md)
+[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise-06-AetherHey008/refs/heads/main/README.md)
 
 # Aufgabe 06
 
@@ -186,8 +186,92 @@ Ihre Aufgabe ist dann:
 
 Falls im Verlauf der Jürgen-Issues ein UML-Klassendiagramm gefordert wird, ergänzen Sie es in diesem Abschnitt.
 
+<!-- kevin-uml:start -->
 ```text @plantUML
 @startuml
+skinparam classAttributeIconSize 0
+
+class Grundstueck {
+    + string Flurstuecknummer
+    + double Groesse
+    + string Lage
+    + string AktuelleNutzung
+    + string Bebaubarkeit
+    + string BPlanNummer
+    + decimal Bodenrichtwert
+    + string Eigentuemer
+}
+
+class Bauflaeche {
+    + string Id
+    + double Groesse
+    + FlaechenStatus Status
+    + void FlaecheReservieren()
+}
+
+enum FlaechenStatus {
+    Frei
+    Reserviert
+    Bebaut
+}
+
+class Bauvorhaben {
+    + string Id
+    + string GeplanteNutzung
+    + DateTime Beginn
+    + DateTime Fertigstellung
+    + BauvorhabenStatus Status
+    + void BauvorhabenAnlegen()
+    + void StatusAktualisieren()
+}
+
+enum BauvorhabenStatus {
+    AntragEingereicht
+    Genehmigt
+    Abgelehnt
+    InBearbeitung
+    Abgeschlossen
+}
+
+class Antragsteller {
+    + string Name
+    + string Kontaktdaten
+    + string Firma
+}
+
+Grundstueck "1" *-- "*" Bauflaeche : enthält
+Bauvorhaben "*" o-- "1..*" Bauflaeche : belegt
+Bauvorhaben "*" --> "1" Antragsteller : gestellt von
+
+@enduml
+```
+@plantUML.eval(png)
+<!-- kevin-uml:end -->ertigstellung
+    + BauvorhabenStatus Status
+    + BauvorhabenAnlegen()
+    + StatusAktualisieren()
+}
+
+enum BauvorhabenStatus {
+    AntragEingereicht
+    Genehmigt
+    Abgelehnt
+    InBearbeitung
+    Abgeschlossen
+}
+
+class Antragsteller {
+    + string Name
+    + string Kontaktdaten
+    + string Firma
+}
+
+Grundstueck "1" *-- "*" Bauflaeche : enthält
+Bauvorhaben "*" o-- "1..*" Bauflaeche : belegt
+Bauvorhaben "*" --> "1" Antragsteller : gestellt von
+
+note right of Bauflaeche : Validierung: Prüfen ob
+Status == Frei vor Reservierung
 
 @enduml
 ```
